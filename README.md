@@ -29,7 +29,7 @@ npm install -g @angular/cli
 2. git init
 ```
 ```
-3. git remote add origin https://github.com/laffingDragons/Todo.git
+3. git remote add origin https://github.com/laffingDragons/Issue-Tracking-Tool-Angular7-.git
 ```
 ```
 4. git pull origin master
