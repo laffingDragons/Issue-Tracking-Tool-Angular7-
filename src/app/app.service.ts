@@ -11,8 +11,8 @@ import { stringify } from 'querystring';
 @Injectable()
 export class AppService {
 
-  // public url = 'http://localhost:3000';
-  private url ='http://tracking-node.akshaypatil.online';
+  public url = 'http://localhost:3000';
+  // private url ='http://tracking-node.akshaypatil.online';
 
 
   constructor(public http: HttpClient) { }
