@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+@import '~@angular/material/theming';
+$custom-typography: mat-typography-config($font-family: '"Montserrat", sans-serif;');
+@include mat-core($custom-typography);
+
+body {
+    margin: 0;
+    background: #F2F2F2;
+    font-family: 'Montserrat', sans-serif !important;
+    height: 100vh;
+}
+a{
+    color:#3f51b5;
+}
+
+#container {
+//    display: grid;
+//    grid-template-columns: 70px auto;
+   height: 100%;
+    
+
+   #content {
+       padding: 30px 50px;
+
+       ul {
+           list-style-type: none;
+           margin:0;padding:0;
+       
+           li {
+               background: #fff;
+               border-radius: 8px;
+               padding: 20px;
+               margin-bottom: 8px;
+       
+               a {
+                   font-size: 1.5em;
+                   text-decoration: none;
+                   font-weight: bold;
+                   color:#00A8FF;
+               }
+       
+               ul {
+                   margin-top: 20px;
+                   
+                   li {
+                       padding:0;
+       
+                       a {
+                           font-size: 1em;
+                           font-weight: 300;
+                       }
+                   }
+               }
+           }
+       }
+   }
+}
+

@@ -1,0 +1,77 @@
+.main-head{
+    margin: auto;
+    margin-top: 12%;
+}
+@media screen and (max-width: 500px){
+  .main-head{
+    margin: auto;
+    margin-top: 18%;
+}
+}
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .title{
+    width: 30%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.gridbtn{
+    width: 30%;
+}
+
+.title-expansion{
+  width: 30%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  color: black !important;
+}
+
+.status-done{
+  text-transform: uppercase;
+  color: green !important;
+}
+
+.status-progress{
+  text-transform: uppercase;
+  color: cornflowerblue !important;
+}
+
+.status-backlog{
+  text-transform: uppercase;
+  color: red !important;
+}
+
+.status-testing{
+  text-transform: uppercase;
+  color: darkorchid;
+}
+
+.slideout{
+  animation: yourAnimation 0.5s forwards 0s ease;
+}
+
+
+@keyframes yourAnimation{
+  0%{
+      transform: translateX(-100%);
+      }
+  100%{
+      transform: translateX(0%);
+      }
+}

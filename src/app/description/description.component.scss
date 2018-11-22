@@ -1,0 +1,53 @@
+.full-card{
+    width: 100%;
+    margin-top: 12%;
+
+}
+
+.full-card1{
+    margin-top: 15px;
+    width: 100%;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .example-chip-list {
+    width: 100%;
+  }
+  .example-margin {
+    margin: 0 10px;
+  }
+
+
+  
+.status-done{
+  text-transform: uppercase;
+  color: green !important;
+}
+
+.status-progress{
+  text-transform: uppercase;
+  color: cornflowerblue !important;
+}
+
+.status-backlog{
+  text-transform: uppercase;
+  color: red !important;
+}
+
+.status-testing{
+  text-transform: uppercase;
+  color: darkorchid;
+}
+
+.inline{
+  display: inline-block;
+}

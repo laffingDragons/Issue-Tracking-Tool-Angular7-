@@ -1,0 +1,74 @@
+nav {
+    background: #3f51b5;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+
+    .brand{
+     color: white;
+     font-size: x-large;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+
+            a {
+                color: #fff;
+                padding: 20px;
+                display: block;
+            }
+
+            .activated {
+                background-color: #F2F2F2;
+                color: #2D2E2E;
+            }
+        }
+    }
+    
+}
+
+.icoBtn{
+    width: 70px;
+    height: 70px;
+    color: white;
+}
+
+@keyframes yourAnimation{
+    0%{
+        transform: translateX(-70px);
+        }
+    100%{
+        transform: rotate(xx) translateX(0px);
+        }
+}
+
+.anime{
+    animation: yourAnimation 0.5s forwards 0s ease;
+}
+
+
+.small-card{
+    height: 100%;
+    width: 100%;
+    background:white;
+    color: black;
+    margin: 0px 0px 10px 0px;
+    padding: 12px;
+    box-shadow:none;
+}
+
+.hover-shadow :hover{
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                  0 1px 18px 0 rgba(0, 0, 0, 0.12),
+                  0 3px 5px -1px rgba(0, 0, 0, 0.4)
+}
+
+a:hover{
+    box-shadow: none !important;
+    outline: none;
+    text-decoration: none;
+}

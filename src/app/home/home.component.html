@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="main-head text-center">Issue Tracking Tool</h1>
+      <br>
+    </div>
+
+
+    <div class="col-md-12">
+      <mat-form-field class="example-full-width text-center">
+        <input  matInput placeholder="SearchBy Title or Description" style="width:50%"  (change)="search($event)" [(ngModel)]="searchText" matTooltip="Press enter to Search">
+        <button *ngIf="cross" class="float-right" mat-icon-button color='primary' matTooltip="clear"  (click)="ngOnInit()"><i class="material-icons" style="font-size:16px"> close</i></button>
+      </mat-form-field>
+
+    </div>
+    <br>
+    <mat-spinner class="mx-auto" *ngIf='!issues && !noIssue'></mat-spinner>
+    <mat-card class="example-full-width" *ngIf='noIssue'>
+      <h2 class="text-center" > No Issue Found !</h2>
+      <hr>
+      <p class="text-center" > Click on Report to report an Issue</p>
+    </mat-card>
+    <div *ngIf='issues' class="col-md-12">
+      <mat-accordion>
+        <mat-expansion-panel hideToggle disabled>
+          <mat-expansion-panel-header >
+            <mat-panel-title matTooltip="SortBy Title" class="title-expansion" (click)="sortBy('title')">
+              <b> Title</b>
+            </mat-panel-title>
+            <mat-panel-title matTooltip="SortBy Reporter" class="title-expansion" (click)="sortBy('reporter')">
+              <b>Reporter</b>
+            </mat-panel-title>
+            <mat-panel-description matTooltip="SortBy Status" class="title-expansion" (click)="sortBy('status')">
+              <b color="primary">Status</b>
+            </mat-panel-description>
+            <span class="title-expansion" matTooltip="SortBy Status Date" (click)="sortBy('date')"><b>Date</b></span>&nbsp;&nbsp;
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion *ngFor="let issue of issues; let i = index" >
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title class="text-capitalize title">
+              {{issue.title}}
+            </mat-panel-title>
+            <mat-panel-title class="text-capitalize title">
+              {{issue.reporter[0].name}}
+            </mat-panel-title>
+            <mat-panel-description class="title capitalize">
+              <span *ngIf="issue.status == 'done'" class="status-done">{{issue.status}} </span>
+              <span *ngIf="issue.status == 'in-progress'" class="status-progress">{{issue.status}} </span>
+              <span *ngIf="issue.status == 'backlog'" class="status-backlog">{{issue.status}} </span>
+              <span *ngIf="issue.status == 'in-test'" class="status-testing">{{issue.status}} </span>
+            </mat-panel-description>
+            <span class="title">{{issue.createdOn | date: "short"}}</span>
+
+
+          </mat-expansion-panel-header>
+
+          <div class="row">
+            <div class="col-md-6">
+              <b>Description</b>
+              <hr>
+              <p [innerHTML]="issue.description"></p>
+            </div>
+            <div class="col-md-6">
+              <b>Image</b>
+              <hr>
+              <ng-container>
+
+                <!-- <img src="http://localhost:3000/uploads/{{issue.screenshot}}" alt="Image" width="100%" height="200px" style="object-fit:cover"> -->
+                <img src="http://tracking-node.akshaypatil.online/uploads/{{issue.screenshot}}" alt="Image" width="100%" height="200px" style="object-fit:cover">
+
+              </ng-container>
+              <hr>
+              <a mat-icon-button class="d-block ml-auto" color='primary' matTooltip="Edit" routerLink="/description/{{issue.issueId}}"><i
+                  class="material-icons"> edit</i></a>
+
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+      <hr>
+      <mat-paginator  class="mat-elevation-z5" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="pageIndex"
+        (page)="pageEvent = getServerData($event)">
+      </mat-paginator>
+      <br>
+    </div>
+
+  </div>
+</div>

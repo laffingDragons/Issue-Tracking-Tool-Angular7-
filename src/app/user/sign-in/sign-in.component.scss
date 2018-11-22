@@ -1,0 +1,74 @@
+.signin-card{
+    width: 100%;
+    margin: auto;
+    // margin-top: 6%;
+}
+.full-page{
+    height: -webkit-fill-available;
+    width: 100%;
+}
+
+.bottom-grid {
+    background: url('../../../assets/bg.jpg') 0px 0px;
+    width: 100%;
+    min-height: 100%;
+    display: block;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .preferred-login {
+    padding-top: 8px;
+    padding-bottom: 11px;
+    margin-bottom: 16px;
+    background-color: #FFF;
+    border-radius: 3px;
+    border: 1px solid #d6d9dc;
+    color: #535a60;
+    text-align: center;
+    cursor: pointer;
+}
+.preferred-login.facebook-login {
+    color: #fff;
+    background-color: #395697;
+    border: none;
+}
+  
+
+
+.anime{
+    animation: yourAnimation 0.5s forwards 0s ease;
+}
+
+@keyframes yourAnimation{
+    0%{
+        transform: scale(1) ;
+        opacity: 1;
+        }
+    100%{
+        transform: scale(0.4) ;
+        opacity: 0.4;
+        }
+}
+
+.subtitle{
+    font-size: 24px;
+}
+
+.main-title{
+    font-size: 34px;
+
+}
+

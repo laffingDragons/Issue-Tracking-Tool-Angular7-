@@ -1,0 +1,66 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="small-card " *ngIf="noNotify">
+          Notifications Box empty!
+        </div>
+        <div *ngFor="let notify of notifications" class="hover-shadow">
+          <div class="small-card ">
+            <a routerLink="description/{{notify.issueId}}" data-dismiss="modal">
+              {{notify.message}}
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of modal -->
+
+<nav class="navbar navbar-expand-lg ">
+  <a class="brand" routerLink="home"> Issue Tracker Tool</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="material-icons" style="color:white;">menu</i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <li>
+        <a routerLink="home" [class.activated]="currentUrl == '/home'">
+          Home
+        </a>
+      </li>
+      <li>
+        <a *ngIf="currentUrl" routerLink="description/add" [class.activated]="currentUrl.split('/')[1] == 'description'">
+          Report
+        </a>
+      </li>
+
+      <li>
+        <button class="icoBtn" mat-icon-button>
+          <mat-icon [matBadge]="count" matBadgeColor="accent" data-toggle="modal" data-target="#exampleModal" (click)="clearNotify()">notifications_active</mat-icon>
+        </button>
+      </li>
+
+      <li (click)="logout()">
+        <a style="cursor: pointer;">
+          Logout
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</nav>

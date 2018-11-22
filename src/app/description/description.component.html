@@ -1,0 +1,162 @@
+<div class="container">
+
+  <div class="row">
+    <mat-card class="full-card">
+      <button mat-icon-button color="primary" matTooltip="Back" (click)="goBack()">
+        <i class="material-icons"> arrow_back </i>
+      </button>
+      <button mat-icon-button class="float-right" color="primary" data-toggle="collapse" href="#collapseExample" role="button"
+        aria-expanded="false" aria-controls="collapseExample" matTooltip="Delete">
+        <i class="material-icons"> delete </i>
+      </button>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <span class="text-right">Do you really want delete this Issue? 
+            <button mat-raised-button color="primary" (click)="delete()">Yes</button>
+          </span>
+        </div>
+      </div>
+      <br>
+      <h2 class="text-center">Report Issue</h2>
+      <br>
+      <br>
+      <div class="row" *ngIf="!editMode || userId == reporterId || assigneeArray.includes(userId)">
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Title" [(ngModel)]="title">
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-select placeholder="Status" [(ngModel)]="status">
+              <mat-option value="backlog">BackLog</mat-option>
+              <mat-option value="in-progress">In Progress</mat-option>
+              <mat-option value="in-test">In Test</mat-option>
+              <mat-option value="done">Done</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <br>
+
+        <div class="col-md-6">
+          <h5>Screenshot</h5>
+          <br>
+          <img class="mx-auto d-block" *ngIf="imageUrl || selectFile" [src]="imageUrl" width="50%" alt="">
+          <hr>
+          <div *ngIf="warning" class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Warning!</strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <input style="display:none" type="file" (change)=" onFileSelected($event)" #fileInput>
+          <button mat-raised-button class="mat-elevation-z1" color='primary' (click)="fileInput.click()">Image</button>
+        </div>
+        <br>
+
+
+        <div class="col-md-6">
+          <h5>Description</h5>
+          <app-ngx-editor placeholder="Issue Description" [config]="editorConfig" [spellcheck]="true" [(ngModel)]="editorContent"></app-ngx-editor>
+        </div>
+
+        <hr>
+      </div>
+
+      <!-- only seen in edit mode and but not editable -->
+      <div class="row" *ngIf="editMode && userId !== reporterId && !assigneeArray.includes(userId)">
+        <div class="col-md-6">
+          <h3>{{title}}</h3>
+        </div>
+
+        <div class="col-md-6">
+          <span *ngIf="status == 'done'" class="status-done">{{status}} </span>
+          <span *ngIf="status == 'in-progress'" class="status-progress">{{status}} </span>
+          <span *ngIf="status == 'backlog'" class="status-backlog">{{status}} </span>
+          <span *ngIf="status == 'in-test'" class="status-testing">{{status}} </span>
+        </div>
+
+        <br>
+
+        <div class="col-md-6">
+          <h5>Screenshot</h5>
+          <br>
+          <img class="mx-auto d-block" *ngIf="imageUrl || selectFile" [src]="imageUrl" width="50%" alt="">
+
+        </div>
+
+        <br>
+
+
+        <div class="col-md-6">
+          <h5>Description</h5>
+          <p [innerHTML]="editorContent"></p>
+        </div>
+
+        <hr>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Add Assignee</h5>
+          <mat-form-field class="example-full-width text-capitalize">
+            <mat-select placeholder="Assignee" [formControl]="assignee" multiple>
+              <mat-option class="text-capitalize" *ngFor="let user of users" [value]="user">
+                <!-- <mat-option class="text-capitalize" *ngFor="let user of users" [value]="user" [disabled]="anotherList.includes(user)"> -->
+                {{user.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="ml-auto d-block p-3">
+          <button *ngIf="!uploadStautus && !warning && assigneeArray.includes(userId) || userId == reporterId  || !editMode" mat-flat-button color="primary" (click)="save()">Save</button>
+          <button *ngIf="editMode && userId !== reporterId && !assigneeArray.includes(userId)" mat-flat-button color="primary"
+            (click)="addAssignee()">Add
+            Assignee</button>
+          <mat-progress-spinner *ngIf="uploadStautus" class="example-margin" color="primary" mode="determinate"
+            diameter=40 [value]="progress">
+          </mat-progress-spinner>
+        </div>
+        <br>
+      </div>
+    </mat-card>
+
+    <mat-card class="full-card1" *ngIf='editMode'>
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Comments</h5>
+          <hr>
+          <div *ngFor="let comments of commentsArray">
+            <b class="text-capitalize">{{ comments.name }}</b>
+            <p>{{ comments.comment }}</p>
+            <hr>
+          </div>
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Leave a comment" [(ngModel)]="comment"></textarea>
+          </mat-form-field>
+          <div class="float-right">
+            <button mat-flat-button color="warn" *ngIf="userId !== reporterId && !watchee && !assigneeArray.includes(userId)"
+              (click)="addWatchee()">Watch</button>
+            &nbsp;&nbsp;
+            <button mat-flat-button color="primary" (click)="postComment()">Comment</button>
+          </div>
+        </div>
+
+
+        <div class="col-md-12" *ngIf="watchers && watchers.length">
+          <h5>Watching</h5>
+          <mat-chip-list class="inline" *ngFor="let watcher of watchers">
+            <mat-chip color="primary" selected>{{watcher.name}}</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+    </mat-card>
+
+    <br>
+  </div>
+</div>
