@@ -7,7 +7,7 @@
       </button>
       <button mat-icon-button class="float-right" color="primary" data-toggle="collapse" href="#collapseExample" role="button"
         aria-expanded="false" aria-controls="collapseExample" matTooltip="Delete">
-        <i class="material-icons" *ngIf="!editMode || userId == reporterId || assigneeArray.includes(userId)"> delete </i>
+        <i class="material-icons" *ngIf="editMode && userId == reporterId "> delete </i>
       </button>
       <div class="collapse" id="collapseExample">
         <div class="card card-body">
